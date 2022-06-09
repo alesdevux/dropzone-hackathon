@@ -1,8 +1,9 @@
+import DragAndDrop from "./views/DragAndDrop";
 
 function App() {
   return (
     <>
-      <p>Start</p>
+      <DragAndDrop />
     </>
   );
 }
