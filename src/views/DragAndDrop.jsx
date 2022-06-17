@@ -6,6 +6,7 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
   const [files, setFiles] = useState([])
+  const [totalSize, setTotalSize] = useState(0)
   
   const isLoggedIn = Object.keys(user).length > 0
   // const scopes = "https://www.googleapis.com/auth/drive"
@@ -27,6 +28,7 @@ const DragAndDrop = () => {
   const addFile = (file) => {
     console.log("File:", file)
     setFiles([...files, file])
+    setTotalSize(totalSize + file.size)
   }
 
   const dropFile = (e) => {
@@ -96,6 +98,7 @@ const DragAndDrop = () => {
           {isLoggedIn ? (
             <>
               <p className="uppercase text-md">Archivos cargados:</p>
+              <p className="text-sm opacity-40">{sizeToMBorKB(totalSize)}/{sizeToMBorKB(2000000)}</p>
               <div className="flex flex-col text-sm">
                 {files.map((file, index) => (
                   <div key={index} className="flex items-center gap-2">
