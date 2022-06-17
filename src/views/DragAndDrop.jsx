@@ -5,7 +5,9 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
 
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
+  
   const isLoggedIn = Object.keys(user).length > 0
+  // const scopes = "https://www.googleapis.com/auth/drive"
 
   const handleCallbackResponse = (response) => {
     console.log("Encoded JWT ID token:", response.credential)
@@ -21,6 +23,18 @@ const DragAndDrop = () => {
     )
   }
 
+  const dropFile = (e) => {
+    e.preventDefault()
+    const file = e.dataTransfer.files[0]
+    console.log("File:", file)
+  }
+
+  const changeFile = (e) => {
+    e.preventDefault()
+    const file = e.target.files[0]
+    console.log("File:", file)
+  }
+
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
@@ -34,7 +48,13 @@ const DragAndDrop = () => {
     <section className="flex min-h-screen gap-10 p-10 text-white bg-slate-800">
       <div className="flex flex-col justify-between w-3/4">
         {isLoggedIn ? (
-          <div className="flex items-center border shadow-xl cursor-pointer border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50">
+          <div className="relative flex items-center border shadow-xl border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50">
+            <input 
+              type="file"
+              onDrop={(e) => {dropFile(e)}}
+              onChange={(e) => {changeFile(e)}}
+              className="absolute w-full h-full opacity-0 cursor-pointer"    
+            />
             <p className="text-4xl uppercase">Arrastra tus archivos aquí</p>
           </div>
         ) : (
@@ -56,9 +76,6 @@ const DragAndDrop = () => {
           <h3 className="py-4 text-xl font-semibold text-center">Te damos la bienvenida a DDrop</h3>
           <p className="max-w-[75ch]">Para subir tus archivos de forma simple a Drive, puedes hacer Login a través de Google.</p>
         </div>
-        {/* <button className="p-3 border-2 border-white rounded-md hover:bg-white/10">
-          Login con Google
-        </button> */}
         { isLoggedIn ? (
           <>
             <div className="flex items-center gap-5">
