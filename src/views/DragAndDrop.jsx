@@ -5,6 +5,7 @@ const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
 
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
+  const [files, setFiles] = useState([])
   
   const isLoggedIn = Object.keys(user).length > 0
   // const scopes = "https://www.googleapis.com/auth/drive"
@@ -23,16 +24,30 @@ const DragAndDrop = () => {
     )
   }
 
+  const addFile = (file) => {
+    console.log("File:", file)
+    setFiles([...files, file])
+  }
+
   const dropFile = (e) => {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
-    console.log("File:", file)
+    addFile(file)
   }
 
   const changeFile = (e) => {
     e.preventDefault()
     const file = e.target.files[0]
-    console.log("File:", file)
+    addFile(file)
+  }
+
+  const sizeToMBorKB = (size) => {
+    let mb = (size / 1024 / 1024).toFixed(2)
+    if (mb < 1) {
+      mb = (size / 1024).toFixed(2)
+      return `${mb} KB`
+    }
+    return `${mb} MB`
   }
 
   useEffect(() => {
@@ -44,8 +59,12 @@ const DragAndDrop = () => {
     renderLoginButton()
   }, [user])
 
+  useEffect(() => {
+    console.log("Files:", files)
+  }, [files])
+
   return (
-    <section className="flex min-h-screen gap-10 p-10 text-white bg-slate-800">
+    <section className="flex min-h-screen gap-10 p-10 text-white select-none bg-slate-800">
       <div className="flex flex-col justify-between w-3/4">
         {isLoggedIn ? (
           <div className="relative flex items-center border shadow-xl border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50">
@@ -74,7 +93,21 @@ const DragAndDrop = () => {
       <div className="flex flex-col justify-center w-1/4 gap-10">
         <div className="pb-10 border-b-2 border-b-white/30">
           <h3 className="py-4 text-xl font-semibold text-center">Te damos la bienvenida a DDrop</h3>
-          <p className="max-w-[75ch]">Para subir tus archivos de forma simple a Drive, puedes hacer Login a través de Google.</p>
+          {isLoggedIn ? (
+            <>
+              <p className="uppercase text-md">Archivos cargados:</p>
+              <div className="flex flex-col text-sm">
+                {files.map((file, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <p>{file.name}</p>
+                    <p className="opacity-40">{sizeToMBorKB(file.size)}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="max-w-[75ch]">Para subir tus archivos de forma simple a Drive, puedes hacer Login a través de Google.</p>
+          )}
         </div>
         { isLoggedIn ? (
           <>
