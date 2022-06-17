@@ -31,6 +31,20 @@ const DragAndDrop = () => {
     setTotalSize(totalSize + file.size)
   }
 
+  const removeFile = (index) => {
+    let removeFile = files[index]
+    let newFiles = files.filter((o, i) => index !== i)
+    
+    if (newFiles.length > 0) {
+      setTotalSize(totalSize - removeFile.size)
+      setFiles(newFiles)
+    }
+    if (newFiles.length <= 0) {
+      setTotalSize(0)
+      setFiles([])
+    }
+  }
+
   const dropFile = (e) => {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
@@ -99,9 +113,15 @@ const DragAndDrop = () => {
             <>
               <p className="uppercase text-md">Archivos cargados:</p>
               <p className="text-sm opacity-40">{sizeToMBorKB(totalSize)}/{sizeToMBorKB(2000000)}</p>
-              <div className="flex flex-col text-sm">
+              <div className="flex flex-col gap-1 text-sm">
                 {files.map((file, index) => (
-                  <div key={index} className="flex items-center gap-2">
+                  <div key={index} className="flex items-center gap-2 group">
+                    <button 
+                      onClick={() => {removeFile(index)}}
+                      className="content-center justify-center hidden h-5 font-medium rounded-full bg-slate-600/75 hover:bg-slate-500/75 text-white/60 aspect-square group-hover:flex"
+                    >
+                      x
+                    </button>
                     <p>{file.name}</p>
                     <p className="opacity-40">{sizeToMBorKB(file.size)}</p>
                   </div>
