@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import jwt_decode from "jwt-decode"
 
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
+
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
-  const clientId = "356586937758-u07g3erlgb3m82vts4nu2j3jfd72g26d.apps.googleusercontent.com"
+  const isLoggedIn = Object.keys(user).length > 0
 
   const handleCallbackResponse = (response) => {
     console.log("Encoded JWT ID token:", response.credential)
@@ -22,21 +24,30 @@ const DragAndDrop = () => {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: clientId,
+      client_id: CLIENT_ID,
       callback: handleCallbackResponse,
     })
     renderLoginButton()
-    // google.accounts.id.prompt()
   }, [user])
 
   return (
     <section className="flex min-h-screen gap-10 p-10 text-white bg-slate-800">
       <div className="flex flex-col justify-between w-3/4">
-        <div className="flex items-center border shadow-xl border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50 cursor-grabbing">
-          <p className="text-4xl uppercase">Arrastra tus archivos aquí</p>
-        </div>
+        {isLoggedIn ? (
+          <div className="flex items-center border shadow-xl cursor-pointer border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50">
+            <p className="text-4xl uppercase">Arrastra tus archivos aquí</p>
+          </div>
+        ) : (
+          <button onClick={() => google.accounts.id.prompt()} className="h-3/4">
+            <div className="flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
+              <p className="text-4xl uppercase">
+                {isLoggedIn ? "Arrastra tus archivos aquí" : "Haz login para poder subir archivos"}
+              </p>
+            </div>
+          </button>
+        )}
         
-        <button className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500">
+        <button className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20" disabled={isLoggedIn ? false : true}>
           Subir archivos
         </button>
       </div>
@@ -48,10 +59,10 @@ const DragAndDrop = () => {
         {/* <button className="p-3 border-2 border-white rounded-md hover:bg-white/10">
           Login con Google
         </button> */}
-        { Object.keys(user).length > 0 ? (
+        { isLoggedIn ? (
           <>
-            <div className="flex gap-5 items-center">
-              <img src={user.picture} alt={user.name} className="rounded-full h-12 w-12" />
+            <div className="flex items-center gap-5">
+              <img src={user.picture} alt={user.name} className="w-12 h-12 rounded-full" />
               <div>
                 <p className="text-lg font-bold">Hola {user.name}</p>
                 <p className="text-md">{user.email}</p>
