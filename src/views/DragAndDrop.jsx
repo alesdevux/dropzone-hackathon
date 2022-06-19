@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import jwt_decode from "jwt-decode"
+import axios from "axios"
 
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
+const API_KEY = process.env.REACT_APP_GOOGLE_DRIVE_KEY;
 
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
@@ -9,7 +11,19 @@ const DragAndDrop = () => {
   const [totalSize, setTotalSize] = useState(0)
   
   const isLoggedIn = Object.keys(user).length > 0
-  // const scopes = "https://www.googleapis.com/auth/drive"
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: CLIENT_ID,
+      callback: handleCallbackResponse,
+    })
+    renderLoginButton()
+  }, [user])
+
+  useEffect(() => {
+    console.log("Files:", files)
+  }, [files])
 
   const handleCallbackResponse = (response) => {
     console.log("Encoded JWT ID token:", response.credential)
@@ -66,18 +80,27 @@ const DragAndDrop = () => {
     return `${mb} MB`
   }
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: CLIENT_ID,
-      callback: handleCallbackResponse,
+  const requestCreateFile = (file) => {
+    axios.post(`https://www.googleapis.com/auth/drive.file?key=${API_KEY}`, {
+      headers: {
+        "Authorization": `Bearer ${user.access_token}`,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      data: {
+        "name": file.name,
+        "mimeType": file.type,
+        "parents": [
+          
+        ]
+      }
+    }).then(res => {
+      console.log("File created:", res.data)
+    }).catch(err => {
+      console.log("Error creating file:", err)
     })
-    renderLoginButton()
-  }, [user])
-
-  useEffect(() => {
-    console.log("Files:", files)
-  }, [files])
+  }
 
   return (
     <section className="flex min-h-screen gap-10 p-10 text-white select-none bg-slate-800">
@@ -101,6 +124,7 @@ const DragAndDrop = () => {
         )}
         
         <button 
+          onClick={() => requestCreateFile(files[0])}
           className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20 disabled:text-white/50"
           disabled={(!isLoggedIn || files.length <= 0) ? true : false}
         >
