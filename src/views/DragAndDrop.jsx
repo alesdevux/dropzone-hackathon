@@ -90,20 +90,21 @@ const DragAndDrop = () => {
               onChange={(e) => {changeFile(e)}}
               className="absolute w-full h-full opacity-0 cursor-pointer"    
             />
-            <p className="text-4xl uppercase">Arrastra tus archivos aquí</p>
+            <p className="text-4xl uppercase text-center">Arrastra tus archivos aquí</p>
           </div>
         ) : (
           <button onClick={() => google.accounts.id.prompt()} className="h-3/4">
             <div className="flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
-              <p className="text-4xl uppercase">
-                {isLoggedIn ? "Arrastra tus archivos aquí" : "Haz login para poder subir archivos"}
-              </p>
+              <p className="text-4xl uppercase text-center">Haz login para poder subir archivos</p>
             </div>
           </button>
         )}
         
-        <button className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20" disabled={isLoggedIn ? false : true}>
-          Subir archivos
+        <button 
+          className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20 disabled:text-white/50"
+          disabled={(!isLoggedIn || files.length <= 0) ? true : false}
+        >
+          Subir {files.length} archivo{files.length === 0 || files.length > 1 ? "s" : ""} a Google Drive
         </button>
       </div>
       <div className="flex flex-col justify-center w-1/4 gap-10">
