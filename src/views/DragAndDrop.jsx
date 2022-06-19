@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import jwt_decode from "jwt-decode"
 import axios from "axios"
 
-const CLIENT_ID = process.env.REACT_APP_GOOGLE_DRIVE_CLIENT_ID;
-const API_KEY = process.env.REACT_APP_GOOGLE_DRIVE_KEY;
+const CLIENT_ID = "356586937758-u07g3erlgb3m82vts4nu2j3jfd72g26d.apps.googleusercontent.com";
+const API_KEY = "AIzaSyAnf0SWqxzx2BLdGqCjz4bx7yZcrixh7XI";
 
 const DragAndDrop = () => {
   const [user, setUser] = useState({})
@@ -113,12 +113,12 @@ const DragAndDrop = () => {
               onChange={(e) => {changeFile(e)}}
               className="absolute w-full h-full opacity-0 cursor-pointer"    
             />
-            <p className="text-4xl uppercase text-center">Arrastra tus archivos aquí</p>
+            <p className="text-4xl text-center uppercase">Arrastra tus archivos aquí</p>
           </div>
         ) : (
           <button onClick={() => google.accounts.id.prompt()} className="h-3/4">
             <div className="flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
-              <p className="text-4xl uppercase text-center">Haz login para poder subir archivos</p>
+              <p className="text-4xl text-center uppercase">Haz login para poder subir archivos</p>
             </div>
           </button>
         )}
