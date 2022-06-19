@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dropzone-hackathon/static/css/main.76b6d00d.css",
+    "main.js": "/dropzone-hackathon/static/js/main.61adafd9.js",
+    "static/js/787.23064d6b.chunk.js": "/dropzone-hackathon/static/js/787.23064d6b.chunk.js",
+    "index.html": "/dropzone-hackathon/index.html",
+    "main.76b6d00d.css.map": "/dropzone-hackathon/static/css/main.76b6d00d.css.map",
+    "main.61adafd9.js.map": "/dropzone-hackathon/static/js/main.61adafd9.js.map",
+    "787.23064d6b.chunk.js.map": "/dropzone-hackathon/static/js/787.23064d6b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76b6d00d.css",
+    "static/js/main.61adafd9.js"
+  ]
+}
