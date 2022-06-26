@@ -104,7 +104,7 @@ const DragAndDrop = () => {
 
   return (
     <section className="flex flex-col-reverse justify-between md:flex-row min-h-screen gap-10 p-10 text-white select-none bg-slate-800">
-      <div className="flex flex-col flex-1 gap-6 md:gap-0 justify-between md:w-3/4">
+      <div className="flex flex-col flex-1 gap-6 justify-between md:w-3/4">
         {isLoggedIn ? (
           <div className="relative flex items-center border shadow-xl border-emerald-500 flex-1 md:h-3/4 place-content-center shadow-emerald-500/50">
             <input 
@@ -116,8 +116,8 @@ const DragAndDrop = () => {
             <p className="text-xl md:text-4xl text-center uppercase">Arrastra tus archivos aquí</p>
           </div>
         ) : (
-          <button onClick={() => google.accounts.id.prompt()} className="flex-1 md:h-3/4 flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
-            <p className="text-xl md:text-4xl text-center uppercase">Haz login para poder subir archivos</p>
+          <button onClick={() => google.accounts.id.prompt()} className="flex-1 md:h-3/4 flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50 text-xl md:text-4xl text-center uppercase">
+            Haz login para poder subir archivos
           </button>
         )}
         
