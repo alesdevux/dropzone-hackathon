@@ -103,36 +103,34 @@ const DragAndDrop = () => {
   }
 
   return (
-    <section className="flex min-h-screen gap-10 p-10 text-white select-none bg-slate-800">
-      <div className="flex flex-col justify-between w-3/4">
+    <section className="flex flex-col-reverse justify-between md:flex-row min-h-screen gap-10 p-10 text-white select-none bg-slate-800">
+      <div className="flex flex-col flex-1 gap-6 md:gap-0 justify-between md:w-3/4">
         {isLoggedIn ? (
-          <div className="relative flex items-center border shadow-xl border-emerald-500 h-3/4 place-content-center shadow-emerald-500/50">
+          <div className="relative flex items-center border shadow-xl border-emerald-500 flex-1 md:h-3/4 place-content-center shadow-emerald-500/50">
             <input 
               type="file"
               onDrop={(e) => {dropFile(e)}}
               onChange={(e) => {changeFile(e)}}
               className="absolute w-full h-full opacity-0 cursor-pointer"    
             />
-            <p className="text-4xl text-center uppercase">Arrastra tus archivos aquí</p>
+            <p className="text-xl md:text-4xl text-center uppercase">Arrastra tus archivos aquí</p>
           </div>
         ) : (
-          <button onClick={() => google.accounts.id.prompt()} className="h-3/4">
-            <div className="flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
-              <p className="text-4xl text-center uppercase">Haz login para poder subir archivos</p>
-            </div>
+          <button onClick={() => google.accounts.id.prompt()} className="flex-1 md:h-3/4 flex items-center h-full border shadow-xl cursor-pointer border-emerald-500 place-content-center shadow-emerald-500/50">
+            <p className="text-xl md:text-4xl text-center uppercase">Haz login para poder subir archivos</p>
           </button>
         )}
         
         <button 
           onClick={() => requestCreateFile(files[0])}
-          className="p-3 font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20 disabled:text-white/50"
+          className="p-3 text-sm mb:text-base font-bold bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/20 disabled:text-white/50"
           disabled={(!isLoggedIn || files.length <= 0) ? true : false}
         >
           Subir {files.length} archivo{files.length === 0 || files.length > 1 ? "s" : ""} a Google Drive
         </button>
       </div>
-      <div className="flex flex-col justify-center w-1/4 gap-10">
-        <div className="pb-10 border-b-2 border-b-white/30">
+      <div className="flex flex-col justify-center md:w-1/4 gap-5 mb:gap-10">
+        <div className="pb-5 mb:pb-10 border-b-2 border-b-white/30">
           <h3 className="py-4 text-xl font-semibold text-center">Te damos la bienvenida a DDrop</h3>
           {isLoggedIn ? (
             <>
