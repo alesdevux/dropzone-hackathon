@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# DROPZONE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Visita la web: [Drag And Drop](https://aleswebgit.github.io/dropzone-hackathon/ "Drag And Drop")
 
-## Available Scripts
+## Background
 
-In the project directory, you can run:
+> Dropzone para la Hackathon BCN Inclusive Coding
+> Impulsado por [Mobile World Capital Barcelona](https://www.mobileworldcapital.com/), [NUWE](https://nuwe.io/) y [Cruz Roja](https://www.cruzroja.es/)
 
-### `npm start`
+## Utilización
+- Vista con Drag and Drop para arrastrar archivos.
+- Te puedes conectar a Google mediante JWT.
+- Una vez te logueas, puedes cargar archivos al Drag and Drop, estos archivos se cargan en la vista, donde también se pueden eliminar.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Features:
+- Que al clicar subir a Drive se conecte con la API, de tal manera que al hacer login con una cuenta de Google se suba a los archivos de esa misma cuenta.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Instalación
 
-### `npm test`
+[Puedes ver el resultado en el siguiente enlace sin instalación alguna.](https://aleswebgit.github.io/dropzone-hackathon/ "Enlace a DropZone")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Probar el proyecto en tu local
 
-### `npm run build`
+Para probar el proyecto en tu local debemos tener en consideración dos cosas:
+Debes bajarte el código en tu ordenador
+[GitHub repositorio DropZone](https://github.com/aleswebgit/dropzone-hackathon "GitHub repositorio DropZone") y al clicar el botón verde que dice **Code**, nos saldrà opciones para clonar ese repositorio.
+Voy a hacer el ejemplo usando el método de protección SSH, pero puedes realizarlo con cualquiera de las opciones.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Abrimos la terminal de nuestro ordenador y vamos a la carpeta donde nos interese tener el proyecto, allí incrustamos el código que hemos copiado del repositorio, añadiendo git clone delante: 
+`git clone git@github.com:aleswebgit/dropzone-hackathon.git`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ahora para verlo en nuestro navegador, debemos entrar a la carpeta del proyecto desde la terminal para:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```shell
+# Instalar las dependencias
+npm install
+```
 
-### `npm run eject`
+```shell
+# Ver el proyecto en el navegador
+npm start
+```
+## Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![React.js](https://img.shields.io/badge/-React.js-09D3AC?logo=react&logoColor=black&color=white&style=flat) ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-06B6D4?logo=tailwindcss&logoColor=black&color=white&style=flat) ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=black&color=white&style=flat) ![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=black&color=white&style=flat)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Reconocimientos
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Gracias a [Mobile World Capital Barcelona](https://www.mobileworldcapital.com/), [NUWE](https://nuwe.io/) y [Cruz Roja](https://www.cruzroja.es/) por la oportuncidad.
+Y gracias a [Factoria F5](https://factoriaf5.org/) por esos meses de formación intensiva.
+## License 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Inlcuir la licéncia y el link a esta
+[MIT](https://opensource.org/licenses/MIT)
